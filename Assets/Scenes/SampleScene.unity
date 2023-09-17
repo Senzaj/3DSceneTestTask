@@ -2111,6 +2111,9 @@ MonoBehaviour:
   _content: {fileID: 379037331}
   _thisCanvas: {fileID: 909909852}
   _toggle: {fileID: 295335925}
+  _hideButton: {fileID: 1862936892}
+  _showButton: {fileID: 969806104}
+  _showButtonCanvas: {fileID: 969806107}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,13 +2253,14 @@ GameObject:
   - component: {fileID: 969806106}
   - component: {fileID: 969806105}
   - component: {fileID: 969806104}
+  - component: {fileID: 969806107}
   m_Layer: 5
   m_Name: ShowListButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &969806103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2359,6 +2363,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969806102}
   m_CullTransparentMesh: 1
+--- !u!225 &969806107
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969806102}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1012779862
 GameObject:
   m_ObjectHideFlags: 0

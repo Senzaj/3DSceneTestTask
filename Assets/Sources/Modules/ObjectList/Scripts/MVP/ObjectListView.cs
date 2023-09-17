@@ -13,6 +13,9 @@ namespace Sources.Modules.ObjectList.Scripts.MVP
         [SerializeField] private Transform _content;
         [SerializeField] private CanvasGroup _thisCanvas;
         [SerializeField] private Toggle _toggle;
+        [SerializeField] private Button _hideButton;
+        [SerializeField] private Button _showButton;
+        [SerializeField] private CanvasGroup _showButtonCanvas;
 
         public event Action<ObjectView> ObjectCreated;
         public event Action<bool, ObjectView> ObjectPanelChangedStatus;
@@ -27,26 +30,28 @@ namespace Sources.Modules.ObjectList.Scripts.MVP
             _objectPanels = new List<SpawnedObjectPanel>();
             _toggle.isOn = false;
             
+            HideCanvas(_showButtonCanvas);
+            
             _toggle.onValueChanged.AddListener(OnAllPanelsChangedStatus);
+            _hideButton.onClick.AddListener(OnHideButtonClicked);
+            _showButton.onClick.AddListener(OnShowButtonClicked);
         }
 
         private void OnDisable()
         {
             _toggle.onValueChanged.RemoveListener(OnAllPanelsChangedStatus);
+            _hideButton.onClick.RemoveListener(OnHideButtonClicked);
+            _showButton.onClick.RemoveListener(OnShowButtonClicked);
         }
 
         public void Show()
         {
-            _thisCanvas.alpha = 1;
-            _thisCanvas.interactable = true;
-            _thisCanvas.blocksRaycasts = true;
+            ShowCanvas(_thisCanvas);
         }
 
         public void Hide()
         {
-            _thisCanvas.alpha = 0;
-            _thisCanvas.interactable = false;
-            _thisCanvas.blocksRaycasts = false;
+            HideCanvas(_thisCanvas);
         }
         
         public void AddObject(ObjectView obj)
@@ -88,6 +93,32 @@ namespace Sources.Modules.ObjectList.Scripts.MVP
         private void OnPanelClicked(Transform objTransform)
         {
             ObjectClicked?.Invoke(objTransform);
+        }
+
+        private void OnHideButtonClicked()
+        {
+            Hide();
+            ShowCanvas(_showButtonCanvas);
+        }
+
+        private void OnShowButtonClicked()
+        {
+            Show();
+            HideCanvas(_showButtonCanvas);
+        }
+
+        private void ShowCanvas(CanvasGroup canvasGroup)
+        {
+            canvasGroup.alpha = 1;
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+        }
+
+        private void HideCanvas(CanvasGroup canvasGroup)
+        {
+            canvasGroup.alpha = 0;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
         }
     }
 }
